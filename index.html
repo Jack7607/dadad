@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GameHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #0a0d16;
+      --card: #12162a;
+      --accent: #00ffd5;
+      --text: #e9ecf1;
+      --muted: #9aa3c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #0f1430, #06080f);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 28px 20px;
+      text-align: center;
+      border-bottom: 1px solid #1a2040;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #151a35, #0f1329);
+      border-radius: 16px;
+      padding: 16px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid #1c2250;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    .thumb {
+      height: 140px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1e90ff, #005eff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 22px;
+      color: white;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .card span {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .card small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 16, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      width: 95%;
+      max-width: 960px;
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    }
+
+    .modal-header {
+      background: #0d122b;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header span {
+      font-weight: 700;
+    }
+
+    .close {
+      cursor: pointer;
+      font-size: 22px;
+      user-select: none;
+    }
+
+    iframe {
+      width: 100%;
+      height: 520px;
+      border: none;
+      background: black;
+    }
+
+    @media (max-width: 600px) {
+      iframe {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>GameHub</h1>
+  <p>Instant browser games</p>
+</header>
+
+<main>
+  <h2>🎮 Retro</h2>
+
+  <div class="grid">
+    <div class="card" onclick="openGame()">
+      <div class="thumb">SONIC</div>
+      <span>Sonic Classic Heroes</span>
+      <small>SEGA Mega Drive</small>
+    </div>
+  </div>
+</main>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>Sonic Classic Heroes</span>
+      <div class="close" onclick="closeGame()">✕</div>
+    </div>
+
+    <iframe
+      id="gameFrame"
+      allowfullscreen="true"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true"
+      scrolling="no">
+    </iframe>
+  </div>
+</div>
+
+<script>
+  function openGame() {
+    const frame = document.getElementById("gameFrame");
+    frame.src = "https://www.retrogames.cc/embed/42046-sonic-classic-heroes.html";
+    document.getElementById("modal").style.display = "flex";
+  }
+
+  function closeGame() {
+    const frame = document.getElementById("gameFrame");
+    frame.src = "";
+    document.getElementById("modal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
